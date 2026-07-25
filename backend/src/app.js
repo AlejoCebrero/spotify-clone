@@ -13,4 +13,7 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
+const songRoutes = require('./routes/songRoutes');
+app.use('/api/songs', songRoutes);
+
 module.exports = app;
