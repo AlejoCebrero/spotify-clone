@@ -16,4 +16,7 @@ app.use('/api/auth', authRoutes);
 const songRoutes = require('./routes/songRoutes');
 app.use('/api/songs', songRoutes);
 
+const playlistRoutes = require('./routes/playlistRoutes');
+app.use('/api/playlists', playlistRoutes);
+
 module.exports = app;
