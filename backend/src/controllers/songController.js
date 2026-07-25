@@ -1,8 +1,16 @@
 const Song = require('../models/Song');
+const searchExternalSongs = require('../services/itunesService');
 
 const getSongs = async (req, res) => {
   try {
-    const songs = await Song.find();
+    const { title, artist, genre } = req.query;
+    const filter = {};
+
+    if (title) filter.title = { $regex: title, $options: 'i' };
+    if (artist) filter.artist = { $regex: artist, $options: 'i' };
+    if (genre) filter.genre = { $regex: genre, $options: 'i' };
+
+    const songs = await Song.find(filter);
     res.status(200).json(songs);
   } catch (error) {
     res.status(500).json({ mensaje: 'Error en el servidor', error: error.message });
@@ -70,4 +78,20 @@ const deleteSong = async (req, res) => {
   }
 };
 
-module.exports = { getSongs, getSongById, createSong, updateSong, deleteSong };
+const searchExternal = async (req, res) => {
+  try {
+    const { term } = req.query;
+
+    if (!term) {
+      return res.status(400).json({ mensaje: 'El parámetro "term" es obligatorio' });
+    }
+
+    const songs = await searchExternalSongs(term);
+    res.status(200).json(songs);
+
+  } catch (error) {
+    res.status(503).json({ mensaje: 'Error al conectar con el servicio externo', error: error.message });
+  }
+};
+
+module.exports = { getSongs, getSongById, createSong, updateSong, deleteSong, searchExternal};

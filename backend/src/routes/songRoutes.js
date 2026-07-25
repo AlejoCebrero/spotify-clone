@@ -5,11 +5,13 @@ const {
   getSongById,
   createSong,
   updateSong,
-  deleteSong
+  deleteSong,
+  searchExternal
 } = require('../controllers/songController');
 const protect = require('../middlewares/authMiddleware');
 
 router.get('/', getSongs);
+router.get('/external/search', searchExternal);
 router.get('/:id', getSongById);
 router.post('/', protect, createSong);
 router.put('/:id', protect, updateSong);
