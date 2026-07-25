@@ -10,4 +10,7 @@ app.get('/', (req, res) => {
   res.json({ mensaje: 'API del clon de Spotify funcionando' });
 });
 
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
 module.exports = app;
