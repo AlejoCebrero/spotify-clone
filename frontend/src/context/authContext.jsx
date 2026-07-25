@@ -1,10 +1,16 @@
 import { createContext, useState, useContext } from 'react';
 import { loginUser } from '../services/authService';
 
+import { createContext, useState, useContext } from 'react';
+import { loginUser } from '../services/authService';
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const [token, setToken] = useState(localStorage.getItem('token'));
 
   const login = async (credentials) => {
@@ -12,12 +18,14 @@ export const AuthProvider = ({ children }) => {
     const { token, user } = response.data;
 
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     setToken(token);
     setUser(user);
   };
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setToken(null);
     setUser(null);
   };

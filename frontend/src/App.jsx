@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import Songs from './pages/Songs';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
+import PlaylistsPage from './pages/PlaylistsPage';
 
 function App() {
   return (
@@ -25,6 +26,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Songs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/playlists"
+          element={
+            <ProtectedRoute>
+              <PlaylistsPage />
             </ProtectedRoute>
           }
         />
