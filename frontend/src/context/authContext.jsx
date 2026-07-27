@@ -1,9 +1,6 @@
 import { createContext, useState, useContext } from 'react';
 import { loginUser } from '../services/authService';
 
-import { createContext, useState, useContext } from 'react';
-import { loginUser } from '../services/authService';
-
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {

@@ -91,8 +91,7 @@ const Songs = () => {
 
   return (
     <div>
-      <h2>Canciones</h2>
-
+      <h3>Canciones</h3>
       <input
         placeholder="Buscar canciones..."
         value={searchTerm}
@@ -101,14 +100,15 @@ const Songs = () => {
           fetchSongs(e.target.value);
         }}
       />
-
+<hr />
+      <h3>Subir canción</h3>
       <form onSubmit={handleSubmit}>
         <input name="title" placeholder="Título" value={formData.title} onChange={handleChange} />
         <input name="artist" placeholder="Artista" value={formData.artist} onChange={handleChange} />
         <input name="album" placeholder="Álbum" value={formData.album} onChange={handleChange} />
         <input name="duration" type="number" placeholder="Duración (segundos)" value={formData.duration} onChange={handleChange} />
         <input name="genre" placeholder="Género" value={formData.genre} onChange={handleChange} />
-        <button type="submit">{editingId ? 'Guardar cambios' : 'Crear canción'}</button>
+        <button type="submit">{editingId ? 'Guardar cambios' : 'Subir canción'}</button>
       </form>
 
       <ul>

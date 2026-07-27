@@ -12,14 +12,10 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Link to="/">Inicio</Link>
-      {token && <Link to="/songs">Canciones</Link>}
-      {token && <Link to="/playlists">Mis Playlists</Link>}
 
       {token ? (
         <>
           <span>Hola, {user?.username}</span>
-          <button onClick={handleLogout}>Cerrar sesión</button>
         </>
       ) : (
         <>
@@ -27,6 +23,11 @@ const Navbar = () => {
           <Link to="/register">Registro</Link>
         </>
       )}
+
+      {token && <Link to="/songs">Inicio</Link>}
+      {token && <Link to="/playlists">Mis Playlists</Link>}
+      {token && <button onClick={handleLogout}>Cerrar sesión</button>}
+
     </nav>
   );
 };
